@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 
 export const Lista = () => {
 
-  const { data : users , isLoading, hasError } = useFetch('http://localhost/crud-empleados/');
+  const apiUrl = 'http://localhost';
+  const { data : users , isLoading, hasError } = useFetch(apiUrl);
   // const {success} = !!data && data[0];
 
   //todo: refactorizar

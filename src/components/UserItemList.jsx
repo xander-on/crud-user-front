@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 export const UserItemList  = ({ user }) => {
 
-  const {id, name, email} = user;
+  //todo mapear respuesta del servidor
+  const {id, nombre:name, correo:email} = user;
 
   return (
     <>

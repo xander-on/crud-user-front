@@ -2,9 +2,13 @@ import Swal from 'sweetalert2';
 
 export const postDataUser = (dataUser) => {
 
-  const datosEnviar = { ...dataUser };
+  const {name:nombre, email:correo} = dataUser;
 
-  fetch('http://localhost/crud-empleados/?insertar=1',{
+  const datosEnviar = { nombre, correo };
+
+  const url = 'http://localhost/?insertar=1';
+
+  fetch(url,{
     method:"POST",
     body: JSON.stringify(datosEnviar)
   })
