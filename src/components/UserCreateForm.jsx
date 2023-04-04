@@ -2,6 +2,7 @@ import { InputText } from "./"
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { postDataUser } from "../helpers";
+import { usePost } from "../hooks/usePost";
 
 export const UserCreateForm = () => {
 
@@ -10,13 +11,16 @@ export const UserCreateForm = () => {
   const [userData, setUserData] = useState({
     name  :'',
     email :''
-  })
+  });
 
+  const url = 'http://localhost/?insertar=1';
   const { name, email } = userData;
+  const {executePost} = usePost(url, {'nombre':name, 'correo':email});
   
   const onSubmit = (e) => {
     e.preventDefault();
-    postDataUser(userData);
+    executePost(userData);
+    //todo mostrar modal ok
     setTimeout(() => {
       navigate("/");
     }, 4001);

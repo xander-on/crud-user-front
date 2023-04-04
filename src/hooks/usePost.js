@@ -9,7 +9,7 @@ export const usePost = (url, data) => {
   });
 
   const postRequest = async () => {
-
+    // console.log({url, data});
     setState({
       ...state,
       isLoading: true,
@@ -28,7 +28,10 @@ export const usePost = (url, data) => {
         isLoading: false,
       });
 
+      // console.log(response);
+
     } catch (error) {
+      console.log('hay un error', error)
       setState({
         ...state,
         isLoading: false,
