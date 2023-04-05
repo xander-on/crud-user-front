@@ -1,3 +1,5 @@
+//solo referencia no se utiliza
+
 export const getDataUsers = async() => {
 
   const url = `https://jsonplaceholder.typicode.com/users`;

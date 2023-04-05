@@ -1,8 +1,7 @@
-import { InputText } from "./"
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { postDataUser } from "../helpers";
-import { usePost } from "../hooks/usePost";
+import { Link, useNavigate } from "react-router-dom";
+import { InputText } from "./"
+import { useFetch } from "../hooks/";
 
 export const UserCreateForm = () => {
 
@@ -15,11 +14,12 @@ export const UserCreateForm = () => {
 
   const url = 'http://localhost/?insertar=1';
   const { name, email } = userData;
-  const {executePost} = usePost(url, {'nombre':name, 'correo':email});
-  
+  const { executeFetch, response } = useFetch('POST', url, {'nombre':name, 'correo':email});
+  console.log(response);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    executePost(userData);
+    executeFetch(userData);
     //todo mostrar modal ok
     setTimeout(() => {
       navigate("/");

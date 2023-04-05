@@ -1,47 +1,67 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-export const useFetch = (url) => {
+export const useFetch = (tipo, url, data) => {
+
+  // console.log({tipo, url, data});
 
   const [state, setState] = useState({
-    data      : [],
-    isLoading : true,
-    hasError  : false,
+    response   : [],
+    isLoading  : true,
+    hasError   : false,
   });
-  
-  const getFetch = async() => {
+
+
+  const getFetch = async () => {
 
     setState({
       ...state,
       isLoading: true,
     });
 
+    try {
+      const resp = (tipo == 'GET') 
+      ? await fetch(url)
+      : await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-    try{
+      const response = await resp.json();
 
-      const resp = await fetch(url);
-      const data = await resp.json();
       setState({
-        data,
+        response,
         isLoading: false,
       });
 
-    }catch(error){
+
+    } catch (error) {
+      console.log('hay un error', error)
       setState({
         ...state,
         isLoading: false,
         hasError: true,
       });
     }
-  }
+  };
 
-  useEffect(() => {
+
+  const executeFetch = () => {
     getFetch();
-  }, [url])
+  };
+
+  if(tipo == 'GET'){
+    useEffect(() => {
+      getFetch();
+    }, [url])
+  }
+    
 
 
   return {
-    data      : state.data,
-    isLoading : state.isLoading,
-    hasError  : state.hasError
+    executeFetch,
+    response: state.response,
+    isLoading: state.isLoading,
+    hasError: state.hasError,
   };
-}
+};

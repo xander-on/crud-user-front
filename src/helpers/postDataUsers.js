@@ -1,3 +1,5 @@
+//solo referencia no se utiliza
+
 import Swal from 'sweetalert2';
 
 export const postDataUser = (dataUser) => {
@@ -20,7 +22,6 @@ export const postDataUser = (dataUser) => {
   .catch( console.log );
 
 }
-
 
 
 

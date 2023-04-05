@@ -6,13 +6,11 @@ import { Link } from "react-router-dom";
 export const Lista = () => {
 
   const apiUrl = 'http://localhost';
-  const { data : users , isLoading, hasError } = useFetch(apiUrl);
-  // const {success} = !!data && data[0];
+  const { response : users , isLoading, hasError } = useFetch('GET', apiUrl, {});
 
   //todo: refactorizar
   let success = false;
   
-
   if(users[0] != undefined )
     success = ('success' in users[0]) ? false : true;
 
